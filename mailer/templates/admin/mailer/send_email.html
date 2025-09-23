@@ -1,0 +1,114 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:mailer_emailrequest_changelist' %}">{% trans 'Email requests' %}</a>
+&rsaquo; {{ title }}
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="module aligned">
+    <h1>{{ title }}</h1>
+    
+    <div class="form-row">
+        <div>
+            <label><strong>Recipient:</strong></label>
+            <p>{{ email_request.hr_email }}</p>
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div>
+            <label><strong>Company:</strong></label>
+            <p>{{ email_request.company }}</p>
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div>
+            <label><strong>Position:</strong></label>
+            <p>{{ email_request.role }}</p>
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div>
+            <label><strong>Applicant:</strong></label>
+            <p>{{ email_request.name }}</p>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-row">
+            <div>
+                <label for="id_subject"><strong>Subject:</strong></label>
+                <input type="text" name="subject" id="id_subject" value="Application for {{ email_request.role }} at {{ email_request.company }}" style="width: 100%;">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div>
+                <label for="id_body"><strong>Email Body:</strong></label>
+                <textarea name="body" id="id_body" rows="20" cols="80" style="width: 100%;">{{ email_request.generated_email }}</textarea>
+            </div>
+        </div>
+        
+        <div class="submit-row">
+            <input type="submit" value="Send Email" class="default" name="_save">
+            <a href="{% url 'admin:mailer_emailrequest_change' email_request.pk %}" class="button cancel-link">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<style>
+.form-row {
+    margin-bottom: 15px;
+}
+.form-row label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-row input, .form-row textarea {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.submit-row {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+.submit-row input[type="submit"] {
+    background-color: #417690;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.submit-row input[type="submit"]:hover {
+    background-color: #205067;
+}
+.cancel-link {
+    background-color: #ba2121;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+.cancel-link:hover {
+    background-color: #a41515;
+}
+</style>
+{% endblock %}

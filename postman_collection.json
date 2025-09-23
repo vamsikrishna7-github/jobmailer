@@ -1,0 +1,336 @@
+{
+  "info": {
+    "name": "JobMailer API",
+    "description": "Complete collection for JobMailer API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "health", ""]
+        },
+        "description": "Check if the API is running and healthy"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "health", ""]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"healthy\",\n    \"message\": \"JobMailer API is running\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Generate Email",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"hr_email\": \"hr@techcorp.com\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Software Engineer\",\n    \"name\": \"John Doe\",\n    \"skills\": \"Python, Django, React, PostgreSQL, Docker, AWS\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/generate-email/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "generate-email", ""]
+        },
+        "description": "Generate a professional job application email using Google Gemini AI"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hr_email\": \"hr@techcorp.com\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Software Engineer\",\n    \"name\": \"John Doe\",\n    \"skills\": \"Python, Django, React, PostgreSQL, Docker, AWS\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/generate-email/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "generate-email", ""]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"success\",\n    \"email_text\": \"Subject: Application for Software Engineer Position at Tech Corp\\n\\nDear Hiring Manager,\\n\\nI am writing to express my strong interest in the Software Engineer position at Tech Corp. With my expertise in Python, Django, React, PostgreSQL, Docker, and AWS, I am confident that I would be a valuable addition to your development team.\\n\\nI am particularly excited about the opportunity to contribute to innovative projects and work alongside talented professionals at Tech Corp. I would welcome the opportunity to discuss how my skills and passion for technology can contribute to your team's success.\\n\\nThank you for considering my application. I look forward to hearing from you soon.\\n\\nBest regards,\\nJohn Doe\",\n    \"request_id\": 1\n}"
+        },
+        {
+          "name": "Missing Field Error",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hr_email\": \"hr@techcorp.com\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Software Engineer\",\n    \"name\": \"John Doe\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/generate-email/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "generate-email", ""]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"Missing required field: skills\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Send Email",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"hr_email\": \"hr@techcorp.com\",\n    \"subject\": \"Application for Software Engineer Position at Tech Corp\",\n    \"body\": \"Dear Hiring Manager,\\n\\nI am writing to express my strong interest in the Software Engineer position at Tech Corp. With my expertise in Python, Django, React, PostgreSQL, Docker, and AWS, I am confident that I would be a valuable addition to your development team.\\n\\nI am particularly excited about the opportunity to contribute to innovative projects and work alongside talented professionals at Tech Corp. I would welcome the opportunity to discuss how my skills and passion for technology can contribute to your team's success.\\n\\nThank you for considering my application. I look forward to hearing from you soon.\\n\\nBest regards,\\nJohn Doe\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/send-email/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "send-email", ""]
+        },
+        "description": "Send an email via Django SMTP"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hr_email\": \"hr@techcorp.com\",\n    \"subject\": \"Application for Software Engineer Position at Tech Corp\",\n    \"body\": \"Dear Hiring Manager,\\n\\nI am writing to express my strong interest in the Software Engineer position at Tech Corp. With my expertise in Python, Django, React, PostgreSQL, Docker, and AWS, I am confident that I would be a valuable addition to your development team.\\n\\nI am particularly excited about the opportunity to contribute to innovative projects and work alongside talented professionals at Tech Corp. I would welcome the opportunity to discuss how my skills and passion for technology can contribute to your team's success.\\n\\nThank you for considering my application. I look forward to hearing from you soon.\\n\\nBest regards,\\nJohn Doe\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/send-email/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "send-email", ""]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"sent\",\n    \"message\": \"Email sent successfully\"\n}"
+        },
+        {
+          "name": "Email Configuration Error",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hr_email\": \"hr@techcorp.com\",\n    \"subject\": \"Test Subject\",\n    \"body\": \"Test body content\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/send-email/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "send-email", ""]
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"Email configuration not set. Please configure EMAIL_HOST_USER and EMAIL_HOST_PASSWORD.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Complete Workflow - Generate and Send",
+      "item": [
+        {
+          "name": "Step 1: Generate Email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Store the generated email text for the next request",
+                  "if (pm.response.code === 200) {",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.environment.set('generated_email', responseJson.email_text);",
+                  "    console.log('Email generated successfully:', responseJson.request_id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hr_email\": \"hr@techcorp.com\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Software Engineer\",\n    \"name\": \"John Doe\",\n    \"skills\": \"Python, Django, React, PostgreSQL, Docker, AWS\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/generate-email/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "generate-email", ""]
+            },
+            "description": "Generate email content using AI"
+          }
+        },
+        {
+          "name": "Step 2: Send Generated Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hr_email\": \"hr@techcorp.com\",\n    \"subject\": \"Application for Software Engineer Position at Tech Corp\",\n    \"body\": \"{{generated_email}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/send-email/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "send-email", ""]
+            },
+            "description": "Send the generated email content"
+          }
+        }
+      ]
+    }
+  ]
+}

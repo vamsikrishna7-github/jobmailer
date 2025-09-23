@@ -1,0 +1,1082 @@
+{
+  "info": {
+    "name": "JobMailer Enhanced API",
+    "description": "Complete collection for JobMailer API with comprehensive user profiles and resume attachments",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "2.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "profileId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "health", ""]
+        },
+        "description": "Check if the API is running and healthy"
+      },
+      "response": []
+    },
+    {
+      "name": "Create User Profile",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Store the profile ID for subsequent requests",
+              "if (pm.response.code === 200) {",
+              "    const responseJson = pm.response.json();",
+              "    pm.environment.set('profileId', responseJson.profile_id);",
+              "    console.log('Profile created with ID:', responseJson.profile_id);",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Vamsikrishna Nagidi\",\n    \"location\": \"Hyderabad, India\",\n    \"phone_number\": \"+91-9876543210\",\n    \"primary_email\": \"vamsikrishna.nagidi@gmail.com\",\n    \"alternative_email\": \"vamsikrishna.freelance@gmail.com\",\n    \"portfolio_url\": \"https://vamsikrishna.dev\",\n    \"linkedin_url\": \"https://linkedin.com/in/vamsikrishna\",\n    \"github_url\": \"https://github.com/vamsikrishna\",\n    \"leetcode_url\": \"https://leetcode.com/vamsikrishna\",\n    \"education_degree\": \"BTech\",\n    \"education_field\": \"Computer Science\",\n    \"university_name\": \"JNTU Hyderabad\",\n    \"graduation_year\": 2022,\n    \"gpa\": 3.8,\n    \"programming_languages\": \"Python, JavaScript, Java, C++, Go\",\n    \"python_frameworks\": \"Django, Flask, FastAPI, Pandas, NumPy\",\n    \"frontend_technologies\": \"React, Vue.js, HTML5, CSS3, TypeScript, Tailwind CSS\",\n    \"mobile_development\": \"React Native, Flutter\",\n    \"databases\": \"PostgreSQL, MongoDB, Redis, MySQL, SQLite\",\n    \"cloud_devops\": \"AWS, Docker, Kubernetes, Jenkins, Terraform, CI/CD\",\n    \"deployment_platforms\": \"Heroku, Vercel, Netlify, AWS EC2, DigitalOcean\",\n    \"integrations\": \"REST APIs, GraphQL, WebSockets, OAuth, JWT\",\n    \"development_practices\": \"Agile, TDD, Code Review, Git Flow, Documentation\",\n    \"professional_experience\": \"Software Engineer at TechCorp (2022-2024): Developed full-stack applications using Django and React. Led a team of 3 developers and improved application performance by 40%. Implemented CI/CD pipelines and automated testing.\\n\\nJunior Developer at StartupXYZ (2021-2022): Built REST APIs and worked on database optimization. Collaborated with frontend team to deliver responsive web applications.\",\n    \"projects\": \"E-commerce Platform: Built with React and Django, serving 10k+ users with real-time inventory management.\\n\\nTask Management App: Full-stack application with user authentication, project tracking, and team collaboration features.\\n\\nWeather API Integration: Developed a microservice that aggregates weather data from multiple sources with caching and rate limiting.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/create-profile/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "create-profile", ""]
+        },
+        "description": "Create a comprehensive user profile with all professional information"
+      },
+      "response": []
+    },
+    {
+      "name": "Create Profile with Resume Upload",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Store the profile ID for subsequent requests",
+              "if (pm.response.code === 200) {",
+              "    const responseJson = pm.response.json();",
+              "    pm.environment.set('profileId', responseJson.profile_id);",
+              "    console.log('Profile with resume created with ID:', responseJson.profile_id);",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "Vamsikrishna Nagidi",
+              "type": "text"
+            },
+            {
+              "key": "location",
+              "value": "Hyderabad, India",
+              "type": "text"
+            },
+            {
+              "key": "phone_number",
+              "value": "+91-9876543210",
+              "type": "text"
+            },
+            {
+              "key": "primary_email",
+              "value": "vamsikrishna.nagidi@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "alternative_email",
+              "value": "vamsikrishna.freelance@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "portfolio_url",
+              "value": "https://vamsikrishna.dev",
+              "type": "text"
+            },
+            {
+              "key": "linkedin_url",
+              "value": "https://linkedin.com/in/vamsikrishna",
+              "type": "text"
+            },
+            {
+              "key": "github_url",
+              "value": "https://github.com/vamsikrishna",
+              "type": "text"
+            },
+            {
+              "key": "leetcode_url",
+              "value": "https://leetcode.com/vamsikrishna",
+              "type": "text"
+            },
+            {
+              "key": "education_degree",
+              "value": "BTech",
+              "type": "text"
+            },
+            {
+              "key": "education_field",
+              "value": "Computer Science",
+              "type": "text"
+            },
+            {
+              "key": "university_name",
+              "value": "JNTU Hyderabad",
+              "type": "text"
+            },
+            {
+              "key": "graduation_year",
+              "value": "2022",
+              "type": "text"
+            },
+            {
+              "key": "gpa",
+              "value": "3.8",
+              "type": "text"
+            },
+            {
+              "key": "programming_languages",
+              "value": "Python, JavaScript, Java, C++, Go",
+              "type": "text"
+            },
+            {
+              "key": "python_frameworks",
+              "value": "Django, Flask, FastAPI, Pandas, NumPy",
+              "type": "text"
+            },
+            {
+              "key": "frontend_technologies",
+              "value": "React, Vue.js, HTML5, CSS3, TypeScript, Tailwind CSS",
+              "type": "text"
+            },
+            {
+              "key": "mobile_development",
+              "value": "React Native, Flutter",
+              "type": "text"
+            },
+            {
+              "key": "databases",
+              "value": "PostgreSQL, MongoDB, Redis, MySQL, SQLite",
+              "type": "text"
+            },
+            {
+              "key": "cloud_devops",
+              "value": "AWS, Docker, Kubernetes, Jenkins, Terraform, CI/CD",
+              "type": "text"
+            },
+            {
+              "key": "deployment_platforms",
+              "value": "Heroku, Vercel, Netlify, AWS EC2, DigitalOcean",
+              "type": "text"
+            },
+            {
+              "key": "integrations",
+              "value": "REST APIs, GraphQL, WebSockets, OAuth, JWT",
+              "type": "text"
+            },
+            {
+              "key": "development_practices",
+              "value": "Agile, TDD, Code Review, Git Flow, Documentation",
+              "type": "text"
+            },
+            {
+              "key": "professional_experience",
+              "value": "Software Engineer at TechCorp (2022-2024): Developed full-stack applications using Django and React. Led a team of 3 developers and improved application performance by 40%. Implemented CI/CD pipelines and automated testing.\n\nJunior Developer at StartupXYZ (2021-2022): Built REST APIs and worked on database optimization. Collaborated with frontend team to deliver responsive web applications.",
+              "type": "text"
+            },
+            {
+              "key": "projects",
+              "value": "E-commerce Platform: Built with React and Django, serving 10k+ users with real-time inventory management.\n\nTask Management App: Full-stack application with user authentication, project tracking, and team collaboration features.\n\nWeather API Integration: Developed a microservice that aggregates weather data from multiple sources with caching and rate limiting.",
+              "type": "text"
+            },
+            {
+              "key": "resume_file",
+              "type": "file",
+              "src": "",
+              "description": "Upload resume PDF file (select your resume file)"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/create-profile/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "create-profile", ""]
+        },
+        "description": "Create comprehensive user profile with resume file upload using multipart/form-data"
+      },
+      "response": []
+    },
+    {
+      "name": "Update Profile with Resume",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Store the profile ID for subsequent requests",
+              "if (pm.response.code === 200) {",
+              "    const responseJson = pm.response.json();",
+              "    pm.environment.set('profileId', responseJson.profile_id);",
+              "    console.log('Profile updated with resume, ID:', responseJson.profile_id);",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "Vamsikrishna Nagidi",
+              "type": "text"
+            },
+            {
+              "key": "location",
+              "value": "Hyderabad, India",
+              "type": "text"
+            },
+            {
+              "key": "phone_number",
+              "value": "+91-9876543210",
+              "type": "text"
+            },
+            {
+              "key": "primary_email",
+              "value": "vamsikrishna.nagidi@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "education_degree",
+              "value": "BTech",
+              "type": "text"
+            },
+            {
+              "key": "education_field",
+              "value": "Computer Science",
+              "type": "text"
+            },
+            {
+              "key": "university_name",
+              "value": "JNTU Hyderabad",
+              "type": "text"
+            },
+            {
+              "key": "graduation_year",
+              "value": "2022",
+              "type": "text"
+            },
+            {
+              "key": "programming_languages",
+              "value": "Python, JavaScript, Java, C++",
+              "type": "text"
+            },
+            {
+              "key": "professional_experience",
+              "value": "Software Engineer with 2+ years experience in full-stack development",
+              "type": "text"
+            },
+            {
+              "key": "projects",
+              "value": "Built multiple web applications using Django and React",
+              "type": "text"
+            },
+            {
+              "key": "resume_file",
+              "type": "file",
+              "src": "",
+              "description": "Upload resume PDF file (select your resume file)"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/create-profile/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "create-profile", ""]
+        },
+        "description": "Update existing profile with resume file upload"
+      },
+      "response": []
+    },
+    {
+      "name": "Get User Profile",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/get-profile/{{profileId}}/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "get-profile", "{{profileId}}", ""]
+        },
+        "description": "Retrieve user profile by ID"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate Enhanced Email",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Store the generated email text for the next request",
+              "if (pm.response.code === 200) {",
+              "    const responseJson = pm.response.json();",
+              "    pm.environment.set('generated_email', responseJson.email_text);",
+              "    pm.environment.set('request_id', responseJson.request_id);",
+              "    console.log('Email generated successfully:', responseJson.request_id);",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"profile_id\": {{profileId}},\n    \"hr_email\": \"hr@techcorp.com\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Senior Software Engineer\",\n    \"job_description\": \"We are looking for an experienced full-stack developer with strong Python and React skills. The ideal candidate should have experience with Django, PostgreSQL, and cloud deployment. Knowledge of DevOps practices and team leadership is a plus.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/generate-email-enhanced/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "generate-email-enhanced", ""]
+        },
+        "description": "Generate personalized job application email using comprehensive user profile data"
+      },
+      "response": []
+    },
+    {
+      "name": "Send Email with Resume",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"profile_id\": {{profileId}},\n    \"hr_email\": \"hr@techcorp.com\",\n    \"subject\": \"Application for Senior Software Engineer Position at Tech Corp\",\n    \"body\": \"{{generated_email}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/send-email-with-resume/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "send-email-with-resume", ""]
+        },
+        "description": "Send email with resume attachment"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate Cover Letter PDF",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"profile_id\": {{profileId}},\n    \"company\": \"Tech Corp\",\n    \"role\": \"Senior Software Engineer\",\n    \"job_description\": \"We are looking for an experienced full-stack developer with strong Python and React skills. The ideal candidate should have experience with Django, PostgreSQL, and cloud deployment. Knowledge of DevOps practices and team leadership is a plus.\",\n    \"recipient_name\": \"John Smith\",\n    \"company_address\": \"123 Tech Street\",\n    \"company_city_state_zip\": \"San Francisco, CA 94105\",\n    \"previous_company\": \"TechStart Inc.\",\n    \"key_skills\": \"Python, Django, React, PostgreSQL, AWS, Docker\",\n    \"specific_achievements\": \"Led a team of 5 developers to build a scalable e-commerce platform serving 50,000+ users. Implemented CI/CD pipelines that reduced deployment time by 60%.\",\n    \"company_interest\": \"Tech Corp's innovative approach to cloud-native applications and commitment to developer experience\",\n    \"personal_qualities\": \"strong problem-solving abilities, collaborative mindset, and passion for clean code\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/generate-cover-letter-pdf/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "generate-cover-letter-pdf", ""]
+        },
+        "description": "Generate professional cover letter PDF with detailed company and recipient information"
+      },
+      "response": []
+    },
+    {
+      "name": "Generate Cover Letter PDF (Simple)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"profile_id\": {{profileId}},\n    \"company\": \"Tech Corp\",\n    \"role\": \"Senior Software Engineer\",\n    \"job_description\": \"We are looking for an experienced full-stack developer with strong Python and React skills.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/generate-cover-letter-pdf/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "generate-cover-letter-pdf", ""]
+        },
+        "description": "Generate cover letter PDF using only basic information (uses profile data for missing fields)"
+      },
+      "response": []
+    },
+    {
+      "name": "Send Email with Resume and Cover Letter",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"profile_id\": {{profileId}},\n    \"hr_email\": \"hr@techcorp.com\",\n    \"subject\": \"Application for Senior Software Engineer Position at Tech Corp\",\n    \"body\": \"{{generated_email}}\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Senior Software Engineer\",\n    \"job_description\": \"We are looking for an experienced full-stack developer with strong Python and React skills.\",\n    \"recipient_name\": \"John Smith\",\n    \"company_address\": \"123 Tech Street\",\n    \"company_city_state_zip\": \"San Francisco, CA 94105\",\n    \"previous_company\": \"TechStart Inc.\",\n    \"key_skills\": \"Python, Django, React, PostgreSQL, AWS, Docker\",\n    \"specific_achievements\": \"Led a team of 5 developers to build a scalable e-commerce platform serving 50,000+ users. Implemented CI/CD pipelines that reduced deployment time by 60%.\",\n    \"company_interest\": \"Tech Corp's innovative approach to cloud-native applications and commitment to developer experience\",\n    \"personal_qualities\": \"strong problem-solving abilities, collaborative mindset, and passion for clean code\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/send-email-with-resume-and-cover-letter/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "send-email-with-resume-and-cover-letter", ""]
+        },
+        "description": "Send email with both resume and cover letter attachments using detailed company information"
+      },
+      "response": []
+    },
+    {
+      "name": "Send Email with Resume and Cover Letter (Simple)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"profile_id\": {{profileId}},\n    \"hr_email\": \"hr@techcorp.com\",\n    \"subject\": \"Application for Senior Software Engineer Position at Tech Corp\",\n    \"body\": \"{{generated_email}}\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Senior Software Engineer\",\n    \"job_description\": \"We are looking for an experienced full-stack developer with strong Python and React skills.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/send-email-with-resume-and-cover-letter/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "send-email-with-resume-and-cover-letter", ""]
+        },
+        "description": "Send email with resume and cover letter using basic information (uses profile data for missing fields)"
+      },
+      "response": []
+    },
+    {
+      "name": "Complete Workflow (JSON)",
+      "item": [
+        {
+          "name": "Step 1: Create Profile (JSON)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.environment.set('profileId', responseJson.profile_id);",
+                  "    console.log('Profile created with ID:', responseJson.profile_id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"John Doe\",\n    \"location\": \"San Francisco, CA\",\n    \"phone_number\": \"+1-555-0123\",\n    \"primary_email\": \"john.doe@email.com\",\n    \"portfolio_url\": \"https://johndoe.dev\",\n    \"linkedin_url\": \"https://linkedin.com/in/johndoe\",\n    \"github_url\": \"https://github.com/johndoe\",\n    \"education_degree\": \"BTech\",\n    \"education_field\": \"Computer Science\",\n    \"university_name\": \"Stanford University\",\n    \"graduation_year\": 2022,\n    \"programming_languages\": \"Python, JavaScript, Java, C++\",\n    \"python_frameworks\": \"Django, Flask, FastAPI\",\n    \"frontend_technologies\": \"React, HTML5, CSS3, TypeScript\",\n    \"databases\": \"PostgreSQL, MongoDB, Redis\",\n    \"cloud_devops\": \"AWS, Docker, Kubernetes\",\n    \"professional_experience\": \"Software Engineer with 2+ years experience in full-stack development...\",\n    \"projects\": \"Built multiple web applications using Django and React...\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/create-profile/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "create-profile", ""]
+            }
+          }
+        },
+        {
+          "name": "Step 2: Generate Email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.environment.set('generated_email', responseJson.email_text);",
+                  "    console.log('Email generated successfully');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"profile_id\": {{profileId}},\n    \"hr_email\": \"hr@company.com\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Software Engineer\",\n    \"job_description\": \"Looking for experienced full-stack developer with Python and React skills\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/generate-email-enhanced/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "generate-email-enhanced", ""]
+            }
+          }
+        },
+        {
+          "name": "Step 3: Send Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"profile_id\": {{profileId}},\n    \"hr_email\": \"hr@company.com\",\n    \"subject\": \"Application for Software Engineer Position at Tech Corp\",\n    \"body\": \"{{generated_email}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/send-email-with-resume/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "send-email-with-resume", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Complete Workflow with Resume",
+      "item": [
+        {
+          "name": "Step 1: Create Profile with Resume",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.environment.set('profileId', responseJson.profile_id);",
+                  "    console.log('Profile with resume created with ID:', responseJson.profile_id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Vamsikrishna Nagidi",
+                  "type": "text"
+                },
+                {
+                  "key": "location",
+                  "value": "Hyderabad, India",
+                  "type": "text"
+                },
+                {
+                  "key": "phone_number",
+                  "value": "+91-9876543210",
+                  "type": "text"
+                },
+                {
+                  "key": "primary_email",
+                  "value": "vamsikrishna.nagidi@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "portfolio_url",
+                  "value": "https://vamsikrishna.dev",
+                  "type": "text"
+                },
+                {
+                  "key": "linkedin_url",
+                  "value": "https://linkedin.com/in/vamsikrishna",
+                  "type": "text"
+                },
+                {
+                  "key": "github_url",
+                  "value": "https://github.com/vamsikrishna",
+                  "type": "text"
+                },
+                {
+                  "key": "education_degree",
+                  "value": "BTech",
+                  "type": "text"
+                },
+                {
+                  "key": "education_field",
+                  "value": "Computer Science",
+                  "type": "text"
+                },
+                {
+                  "key": "university_name",
+                  "value": "JNTU Hyderabad",
+                  "type": "text"
+                },
+                {
+                  "key": "graduation_year",
+                  "value": "2022",
+                  "type": "text"
+                },
+                {
+                  "key": "programming_languages",
+                  "value": "Python, JavaScript, Java, C++",
+                  "type": "text"
+                },
+                {
+                  "key": "python_frameworks",
+                  "value": "Django, Flask, FastAPI",
+                  "type": "text"
+                },
+                {
+                  "key": "frontend_technologies",
+                  "value": "React, HTML5, CSS3, TypeScript",
+                  "type": "text"
+                },
+                {
+                  "key": "databases",
+                  "value": "PostgreSQL, MongoDB, Redis",
+                  "type": "text"
+                },
+                {
+                  "key": "cloud_devops",
+                  "value": "AWS, Docker, Kubernetes",
+                  "type": "text"
+                },
+                {
+                  "key": "professional_experience",
+                  "value": "Software Engineer with 2+ years experience in full-stack development using Django and React",
+                  "type": "text"
+                },
+                {
+                  "key": "projects",
+                  "value": "Built multiple web applications using Django and React, including an e-commerce platform serving 10k+ users",
+                  "type": "text"
+                },
+                {
+                  "key": "resume_file",
+                  "type": "file",
+                  "src": "",
+                  "description": "Upload resume PDF file (select your resume file)"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/create-profile/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "create-profile", ""]
+            },
+            "description": "Create profile with resume upload using multipart/form-data"
+          }
+        },
+        {
+          "name": "Step 2: Generate Enhanced Email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.environment.set('generated_email', responseJson.email_text);",
+                  "    pm.environment.set('request_id', responseJson.request_id);",
+                  "    console.log('Enhanced email generated successfully:', responseJson.request_id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"profile_id\": {{profileId}},\n    \"hr_email\": \"hr@techcorp.com\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Senior Software Engineer\",\n    \"job_description\": \"We are looking for an experienced full-stack developer with strong Python and React skills. The ideal candidate should have experience with Django, PostgreSQL, and cloud deployment. Knowledge of DevOps practices and team leadership is a plus.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/generate-email-enhanced/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "generate-email-enhanced", ""]
+            },
+            "description": "Generate personalized email using comprehensive profile data"
+          }
+        },
+        {
+          "name": "Step 3: Send Email with Resume",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"profile_id\": {{profileId}},\n    \"hr_email\": \"hr@techcorp.com\",\n    \"subject\": \"Application for Senior Software Engineer Position at Tech Corp\",\n    \"body\": \"{{generated_email}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/send-email-with-resume/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "send-email-with-resume", ""]
+            },
+            "description": "Send email with automatic resume attachment"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Complete Workflow with Cover Letter",
+      "item": [
+        {
+          "name": "Step 1: Create Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.environment.set('profileId', responseJson.profile_id);",
+                  "    console.log('Profile created with ID:', responseJson.profile_id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Vamsikrishna Nagidi",
+                  "type": "text"
+                },
+                {
+                  "key": "location",
+                  "value": "Hyderabad, India",
+                  "type": "text"
+                },
+                {
+                  "key": "phone_number",
+                  "value": "+91-9876543210",
+                  "type": "text"
+                },
+                {
+                  "key": "primary_email",
+                  "value": "vamsikrishna.nagidi@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "education_degree",
+                  "value": "BTech",
+                  "type": "text"
+                },
+                {
+                  "key": "education_field",
+                  "value": "Computer Science",
+                  "type": "text"
+                },
+                {
+                  "key": "university_name",
+                  "value": "JNTU Hyderabad",
+                  "type": "text"
+                },
+                {
+                  "key": "graduation_year",
+                  "value": "2022",
+                  "type": "text"
+                },
+                {
+                  "key": "programming_languages",
+                  "value": "Python, JavaScript, Java, C++",
+                  "type": "text"
+                },
+                {
+                  "key": "professional_experience",
+                  "value": "Software Engineer with 2+ years experience in full-stack development using Django and React",
+                  "type": "text"
+                },
+                {
+                  "key": "projects",
+                  "value": "Built multiple web applications using Django and React, including an e-commerce platform serving 10k+ users",
+                  "type": "text"
+                },
+                {
+                  "key": "resume_file",
+                  "type": "file",
+                  "src": "",
+                  "description": "Upload resume PDF file (select your resume file)"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/create-profile/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "create-profile", ""]
+            }
+          }
+        },
+        {
+          "name": "Step 2: Generate Short Email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const responseJson = pm.response.json();",
+                  "    pm.environment.set('generated_email', responseJson.email_text);",
+                  "    console.log('Short email generated successfully');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"profile_id\": {{profileId}},\n    \"hr_email\": \"hr@techcorp.com\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Senior Software Engineer\",\n    \"job_description\": \"We are looking for an experienced full-stack developer with strong Python and React skills. The ideal candidate should have experience with Django, PostgreSQL, and cloud deployment.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/generate-email-enhanced/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "generate-email-enhanced", ""]
+            }
+          }
+        },
+        {
+          "name": "Step 3: Send Email with Resume and Cover Letter",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"profile_id\": {{profileId}},\n    \"hr_email\": \"hr@techcorp.com\",\n    \"subject\": \"Application for Senior Software Engineer Position at Tech Corp\",\n    \"body\": \"{{generated_email}}\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Senior Software Engineer\",\n    \"job_description\": \"We are looking for an experienced full-stack developer with strong Python and React skills.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/send-email-with-resume-and-cover-letter/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "send-email-with-resume-and-cover-letter", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Legacy Endpoints",
+      "item": [
+        {
+          "name": "Generate Email (Legacy)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hr_email\": \"hr@company.com\",\n    \"company\": \"Tech Corp\",\n    \"role\": \"Software Engineer\",\n    \"name\": \"John Doe\",\n    \"skills\": \"Python, Django, React, PostgreSQL, Docker\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/generate-email/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "generate-email", ""]
+            },
+            "description": "Legacy endpoint for backward compatibility"
+          }
+        },
+        {
+          "name": "Send Email (Legacy)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hr_email\": \"hr@company.com\",\n    \"subject\": \"Application for Software Engineer Position\",\n    \"body\": \"Dear Hiring Manager,\\n\\nI am writing to express my interest...\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/send-email/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "send-email", ""]
+            },
+            "description": "Legacy endpoint for backward compatibility"
+          }
+        }
+      ]
+    }
+  ]
+}

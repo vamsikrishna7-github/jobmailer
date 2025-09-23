@@ -1,0 +1,116 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:mailer_emailsent_changelist' %}">{% trans 'Email sent' %}</a>
+&rsaquo; {{ title }}
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="module aligned">
+    <h1>{{ title }}</h1>
+    
+    <div class="form-row">
+        <div>
+            <label><strong>Recipient:</strong></label>
+            <p>{{ email_sent.to_email }}</p>
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div>
+            <label><strong>Subject:</strong></label>
+            <p>{{ email_sent.subject }}</p>
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div>
+            <label><strong>Previous Status:</strong></label>
+            <p>
+                {% if email_sent.status == 'sent' %}
+                    <span style="color: green; font-weight: bold;">✓ Sent</span>
+                {% else %}
+                    <span style="color: red; font-weight: bold;">✗ Failed</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <div class="warning-message">
+        <p><strong>⚠️ Warning:</strong> You are about to resend this email to <strong>{{ email_sent.to_email }}</strong>.</p>
+        <p>The recipient may receive a duplicate email if the original was successfully sent.</p>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-row">
+            <div>
+                <label><strong>Email Body Preview:</strong></label>
+                <div style="background-color: #f8f8f8; padding: 15px; border: 1px solid #ddd; border-radius: 4px; white-space: pre-wrap; font-family: monospace; max-height: 300px; overflow-y: auto;">{{ email_sent.body }}</div>
+            </div>
+        </div>
+        
+        <div class="submit-row">
+            <input type="submit" value="Resend Email" class="default" name="_save" style="background-color: #28a745;">
+            <a href="{% url 'admin:mailer_emailsent_change' email_sent.pk %}" class="button cancel-link">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<style>
+.form-row {
+    margin-bottom: 15px;
+}
+.form-row label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.warning-message {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 20px 0;
+}
+.warning-message p {
+    margin: 5px 0;
+}
+.submit-row {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+.submit-row input[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.submit-row input[type="submit"]:hover {
+    background-color: #218838;
+}
+.cancel-link {
+    background-color: #ba2121;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+.cancel-link:hover {
+    background-color: #a41515;
+}
+</style>
+{% endblock %}
